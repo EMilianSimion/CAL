@@ -31,6 +31,8 @@ Command:
   build/default/production/sys_schedule.o \
   build/default/production/sys_tasks.o \
   build/default/production/toggle.o \
+  build/default/production/hal_dc.o \
+  build/default/production/asw_move.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33FJ128MC804.gld.00 \
   --stack=16 \
@@ -72,8 +74,12 @@ c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(divsf3.
                               build/default/production/mcal_pwm.o (___divsf3)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(feqltle.eo)
                               build/default/production/mcal_pwm.o (___eqsf2)
+c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                              build/default/production/hal_dc.o (___gtsf2)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
                               build/default/production/mcal_pwm.o (___fixunssfsi)
+c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                              build/default/production/sys_tasks.o (___floatsisf)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
                               build/default/production/mcal_pwm.o (___floatunsisf)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fpack.eo)
@@ -88,6 +94,8 @@ c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(mulsf3.
                               build/default/production/mcal_pwm.o (___mulsf3)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fcompare.eo)
                               c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(feqltle.eo) (__fcompare)
+c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                              c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatsisf.eo) (___floatdisf)
 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
                               c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
 
@@ -98,14 +106,15 @@ xc16-ld 1.35 (A)
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x448           0x66c  (1644)
-.const                       0x648                 0x6             0x9  (9)
-.text                        0x64e              0x10de          0x194d  (6477)
-.dinit                      0x172c                0x20            0x30  (48)
-.init.delay32               0x174c                0x1c            0x2a  (42)
-.text                       0x1768                0x2e            0x45  (69)
+.text                        0x200               0x472           0x6ab  (1707)
+.const                       0x672                 0x6             0x9  (9)
+.text                        0x678              0x1164          0x1a16  (6678)
+.dinit                      0x17dc                0x28            0x3c  (60)
+.text                       0x1804                0x1e            0x2d  (45)
+.init.delay32               0x1822                0x1c            0x2a  (42)
+.text                       0x183e                0x2e            0x45  (69)
 
-                 Total "program" memory used (bytes):         0x2061  (8289) 6%
+                 Total "program" memory used (bytes):         0x21a2  (8610) 6%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x4000]
@@ -113,9 +122,10 @@ section                    address   length (PC units)   length (bytes) (dec)
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .nbss                        0x800                   0            0x20  (32)
-.bss                         0x820                   0            0x20  (32)
+.ndata                       0x820                   0             0x2  (2)
+.bss                         0x822                   0            0x20  (32)
 
-                 Total "data" memory used (bytes):           0x40  (64) <1%
+                 Total "data" memory used (bytes):           0x42  (66) <1%
 
 
 Dynamic Memory Usage
@@ -123,9 +133,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x840                              0x3fc0  (16320)
+stack                        0x842                              0x3fbe  (16318)
 
-                 Maximum dynamic memory (bytes):         0x3fc0  (16320)
+                 Maximum dynamic memory (bytes):         0x3fbe  (16318)
 
 
 External Symbols in Data Memory (by address):
@@ -146,14 +156,16 @@ External Symbols in Data Memory (by address):
                     0x081a                  _cnt
                     0x081c                  _cnt1
                     0x081e                  _stare_led1
-                    0x0820                  _au8RxBuff
+                    0x0820                  _cntDirectie
+                    0x0822                  _au8RxBuff
 
 External Symbols in Data Memory (by name):
 
-                    0x0820                  _au8RxBuff
+                    0x0822                  _au8RxBuff
                     0x0804                  _bRF_IRQ
                     0x081a                  _cnt
                     0x081c                  _cnt1
+                    0x0820                  _cntDirectie
                     0x0802                  _eRF_OpMode
                     0x0818                  _stare_led
                     0x081e                  _stare_led1
@@ -172,8 +184,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init
                   0x000252                  __data_init_standard
+                  0x000252                  __data_init
                   0x0002c8                  __INT0Interrupt
                   0x0002ce                  __INT1Interrupt
                   0x0002d6                  __INT2Interrupt
@@ -185,249 +197,261 @@ External Symbols in Program Memory (by address):
                   0x000328                  ___subsf3
                   0x00032a                  ___addsf3
                   0x0003e4                  ___divsf3
+                  0x000468                  ___eqsf2
                   0x000468                  ___lesf2
                   0x000468                  ___ltsf2
-                  0x000468                  ___eqsf2
-                  0x00046c                  ___fixunssfsi
-                  0x0004a2                  ___floatunsisf
-                  0x0004a6                  __fpack
-                  0x0004f2                  __funpack
-                  0x00051c                  __funpack2
-                  0x00052c                  __fPropagateNaN
-                  0x00053e                  __fbopExit
-                  0x000546                  __fbopReturnNaN
-                  0x00054c                  ___mulsf3
-                  0x0005b4                  __fcompare
-                  0x0005ea                  ___floatundisf
-                  0x00064e                  _RF_vCloseAllPipes
-                  0x000664                  _RF_vOpenPipeZero
-                  0x00067a                  _RF_vSet_RxPipes
-                  0x0006be                  _RF_vSet_AutoAck
-                  0x000702                  _RF_vSet_AddressWidth
-                  0x000720                  _RF_vSet_AutoRetx
-                  0x000748                  _RF_vSet_RF_Channel
-                  0x00075e                  _RF_vSet_RF_Setup
-                  0x0007a4                  _RF_vEnableActivateReg
-                  0x0007b2                  _RF_vDisableFeatureReg
-                  0x0007c0                  _RF_vSet_PayloadLen
-                  0x0007d8                  _RF_vSet_TxAddr
-                  0x0007e6                  _RF_vSet_PrimaryRxAddr
-                  0x0007f4                  _RF_vSet_RxAddr
-                  0x000814                  _RF_vSet_TxRxAddress
-                  0x000824                  _RF_vFirstPowerUp
-                  0x000838                  _RF_vInit
-                  0x0008a2                  _RF_vSetStandByMode
-                  0x0008b4                  _RF_u8Get_Status
-                  0x0008c2                  _RF_u8Get_ObsTx
-                  0x0008d0                  _RF_u8Get_FifoStatus
-                  0x0008de                  _RF_vFlushTX
-                  0x0008ec                  _RF_vFlushRX
-                  0x0008fa                  _RF_vLoadTxFIFO
-                  0x00090a                  _RF_vSetTxMode
-                  0x00092e                  _RF_vBeginTransmit
-                  0x00095e                  _RF_vSetRxMode
-                  0x000980                  _RF_vBeginReceive
-                  0x000992                  _RF_vGetReceivedData
-                  0x0009de                  _RF_vCheckIRQ
-                  0x000a28                  _test_vReceiver
-                  0x000a5c                  _test_vTransmitter
-                  0x000a66                  _GPIO_u8SetPortPin
-                  0x000bda                  _GPIO_u8WritePortPin
-                  0x000c88                  _GPIO_u8ReadPortPin
-                  0x000d0c                  _GPIO_vWritePort
-                  0x000d40                  _GPIO_u16ReadPort
-                  0x000d6a                  _PWM1_vInit
-                  0x000dba                  _PWM2_vInit
-                  0x000de8                  _PWM1_vSetPeriod
-                  0x000e04                  _PWM2_vSetPeriod
-                  0x000e20                  _PWM1_vSetDuty
-                  0x000f14                  _PWM2_vSetDuty
-                  0x000f7e                  _PWM1_vSetDutyPeriod
-                  0x000fa6                  _PWM2_vSetDutyPeriod
-                  0x000fbc                  _SPI_RF_u8RxBuffOvf
-                  0x000fca                  _SPI_RF_u8TxBuffFull
-                  0x000fd8                  _SPI_RF_u8RxBuffFull
-                  0x000fe6                  _SPI_RF_vInit
-                  0x001042                  _SPI_RF_vDisable
-                  0x001050                  _SPI_RF_u8TxByte
-                  0x00107a                  _SPI_RF_u8TxByteByte
-                  0x0010c2                  _SPI_RF_u8TxCmd
-                  0x00112c                  _SPI_RF_u8ReadReg_5Bytes
-                  0x00118e                  _SPI_RF_u8WriteReg_5Bytes
-                  0x0011ec                  _TIM2_vInit
-                  0x001216                  _TIM2_vStart
-                  0x001222                  _TIM2_vStop
-                  0x001230                  _TIM2_vResetCount
-                  0x001238                  _TIM2_vSetCount
-                  0x001244                  _TIM2_vSetCountLimit
-                  0x001250                  _TIM2_vSetCountLimit_1ms
-                  0x00125a                  _TIM2_vSetTime
-                  0x001282                  _TIM2_u16GetCount
-                  0x00128a                  _TIM3_vInit
-                  0x0012b0                  _TIM3_vStart
-                  0x0012bc                  _TIM3_vStop
-                  0x0012ca                  _TIM3_vResetCount
-                  0x0012d2                  _TIM3_vSetCount
-                  0x0012de                  _TIM3_vSetCountLimit
-                  0x0012ea                  _TIM3_vSetTime
-                  0x001312                  _TIM3_u16GetCount
-                  0x00131a                  _TIM4_vInit
-                  0x00134e                  _TIM4_vStart
-                  0x00135a                  _TIM4_vStop
-                  0x001368                  _TIM4_vResetCount
-                  0x001370                  _TIM4_vSetCount
-                  0x00137c                  _TIM4_vSetCountLimit
-                  0x001388                  _TIM4_u16GetCount
-                  0x001390                  _TIM5_vInit
-                  0x0013c4                  _TIM5_vStart
-                  0x0013d0                  _TIM5_vStop
-                  0x0013de                  _TIM5_vResetCount
-                  0x0013e6                  _TIM5_vSetCount
-                  0x0013f2                  _TIM5_vSetCountLimit
-                  0x0013fe                  _TIM5_u16GetCount
-                  0x001406                  _TASK_vSchedule
-                  0x00149c                  _test_pin_setup
-                  0x0014ae                  _test_vToggle_CSN
-                  0x0014ce                  _test_vToggle_CE
-                  0x0014ee                  _test_vToggle_IRQ
-                  0x00150e                  _INT_vInit
-                  0x001522                  _INT0_vInit
-                  0x001542                  _INT1_vInit
-                  0x001568                  _INT2_vInit
-                  0x001594                  _aprindere
-                  0x0015dc                  _aprindere2
-                  0x00160a                  _ADC_vInit
-                  0x001624                  _ADC_u16Read
-                  0x001662                  _COM_vInit
-                  0x001668                  _COM_vSendMessage
-                  0x001674                  _COM_vStartListening
-                  0x00167c                  _COM_vProcessMessage
-                  0x001684                  _COM_vProcessFIFO
-                  0x0016ac                  _QEI_vInit
-                  0x0016e2                  _QEI_u16getCount
-                  0x0016ea                  _QEI_vResetCount
-                  0x0016f4                  _TASK_Inits
+                  0x00046c                  ___gtsf2
+                  0x00046c                  ___gesf2
+                  0x000470                  ___fixunssfsi
+                  0x0004a6                  ___floatsisf
+                  0x0004ac                  ___floatunsisf
+                  0x0004b0                  __fpack
+                  0x0004fc                  __funpack
+                  0x000526                  __funpack2
+                  0x000536                  __fPropagateNaN
+                  0x000548                  __fbopExit
+                  0x000550                  __fbopReturnNaN
+                  0x000556                  ___mulsf3
+                  0x0005be                  __fcompare
+                  0x0005f4                  ___floatdisf
+                  0x000614                  ___floatundisf
+                  0x000678                  _RF_vCloseAllPipes
+                  0x00068e                  _RF_vOpenPipeZero
+                  0x0006a4                  _RF_vSet_RxPipes
+                  0x0006e8                  _RF_vSet_AutoAck
+                  0x00072c                  _RF_vSet_AddressWidth
+                  0x00074a                  _RF_vSet_AutoRetx
+                  0x000772                  _RF_vSet_RF_Channel
+                  0x000788                  _RF_vSet_RF_Setup
+                  0x0007ce                  _RF_vEnableActivateReg
+                  0x0007dc                  _RF_vDisableFeatureReg
+                  0x0007ea                  _RF_vSet_PayloadLen
+                  0x000802                  _RF_vSet_TxAddr
+                  0x000810                  _RF_vSet_PrimaryRxAddr
+                  0x00081e                  _RF_vSet_RxAddr
+                  0x00083e                  _RF_vSet_TxRxAddress
+                  0x00084e                  _RF_vFirstPowerUp
+                  0x000862                  _RF_vInit
+                  0x0008cc                  _RF_vSetStandByMode
+                  0x0008de                  _RF_u8Get_Status
+                  0x0008ec                  _RF_u8Get_ObsTx
+                  0x0008fa                  _RF_u8Get_FifoStatus
+                  0x000908                  _RF_vFlushTX
+                  0x000916                  _RF_vFlushRX
+                  0x000924                  _RF_vLoadTxFIFO
+                  0x000934                  _RF_vSetTxMode
+                  0x000958                  _RF_vBeginTransmit
+                  0x000988                  _RF_vSetRxMode
+                  0x0009aa                  _RF_vBeginReceive
+                  0x0009bc                  _RF_vGetReceivedData
+                  0x000a08                  _RF_vCheckIRQ
+                  0x000a52                  _test_vReceiver
+                  0x000a86                  _test_vTransmitter
+                  0x000a90                  _GPIO_u8SetPortPin
+                  0x000c04                  _GPIO_u8WritePortPin
+                  0x000cb2                  _GPIO_u8ReadPortPin
+                  0x000d36                  _GPIO_vWritePort
+                  0x000d6a                  _GPIO_u16ReadPort
+                  0x000d94                  _PWM1_vInit
+                  0x000de4                  _PWM2_vInit
+                  0x000e12                  _PWM1_vSetPeriod
+                  0x000e2e                  _PWM2_vSetPeriod
+                  0x000e4a                  _PWM1_vSetDuty
+                  0x000f3e                  _PWM2_vSetDuty
+                  0x000fa8                  _PWM1_vSetDutyPeriod
+                  0x000fd0                  _PWM2_vSetDutyPeriod
+                  0x000fe6                  _SPI_RF_u8RxBuffOvf
+                  0x000ff4                  _SPI_RF_u8TxBuffFull
+                  0x001002                  _SPI_RF_u8RxBuffFull
+                  0x001010                  _SPI_RF_vInit
+                  0x00106c                  _SPI_RF_vDisable
+                  0x00107a                  _SPI_RF_u8TxByte
+                  0x0010a4                  _SPI_RF_u8TxByteByte
+                  0x0010ec                  _SPI_RF_u8TxCmd
+                  0x001156                  _SPI_RF_u8ReadReg_5Bytes
+                  0x0011b8                  _SPI_RF_u8WriteReg_5Bytes
+                  0x001216                  _TIM2_vInit
+                  0x001240                  _TIM2_vStart
+                  0x00124c                  _TIM2_vStop
+                  0x00125a                  _TIM2_vResetCount
+                  0x001262                  _TIM2_vSetCount
+                  0x00126e                  _TIM2_vSetCountLimit
+                  0x00127a                  _TIM2_vSetCountLimit_1ms
+                  0x001284                  _TIM2_vSetTime
+                  0x0012ac                  _TIM2_u16GetCount
+                  0x0012b4                  _TIM3_vInit
+                  0x0012da                  _TIM3_vStart
+                  0x0012e6                  _TIM3_vStop
+                  0x0012f4                  _TIM3_vResetCount
+                  0x0012fc                  _TIM3_vSetCount
+                  0x001308                  _TIM3_vSetCountLimit
+                  0x001314                  _TIM3_vSetTime
+                  0x00133c                  _TIM3_u16GetCount
+                  0x001344                  _TIM4_vInit
+                  0x001378                  _TIM4_vStart
+                  0x001384                  _TIM4_vStop
+                  0x001392                  _TIM4_vResetCount
+                  0x00139a                  _TIM4_vSetCount
+                  0x0013a6                  _TIM4_vSetCountLimit
+                  0x0013b2                  _TIM4_u16GetCount
+                  0x0013ba                  _TIM5_vInit
+                  0x0013ee                  _TIM5_vStart
+                  0x0013fa                  _TIM5_vStop
+                  0x001408                  _TIM5_vResetCount
+                  0x001410                  _TIM5_vSetCount
+                  0x00141c                  _TIM5_vSetCountLimit
+                  0x001428                  _TIM5_u16GetCount
+                  0x001430                  _TASK_vSchedule
+                  0x0014c6                  _test_pin_setup
+                  0x0014d8                  _test_vToggle_CSN
+                  0x0014f8                  _test_vToggle_CE
+                  0x001518                  _test_vToggle_IRQ
+                  0x001538                  _INT_vInit
+                  0x00154c                  _INT0_vInit
+                  0x00156c                  _INT1_vInit
+                  0x001592                  _INT2_vInit
+                  0x0015be                  _aprindere
+                  0x001606                  _aprindere2
+                  0x001634                  _Hal_vSetMotorDir
+                  0x00164e                  _Hal_vInit
+                  0x001656                  _Hal_vSetMotorSpeed
+                  0x00169a                  _ADC_vInit
+                  0x0016b4                  _ADC_u16Read
+                  0x0016f2                  _TASK_Inits
                   0x001706                  _TASK_1ms
                   0x00170c                  _TASK_5ms
                   0x001712                  _TASK_10ms
-                  0x00171a                  _TASK_100ms
-                  0x001720                  _TASK_500ms
-                  0x001726                  _TASK_1000ms
-                  0x00174c                  ___delay32
-                  0x001768                  _MCAL_vInit
-                  0x00177e                  _OSC_vInit
-                  0x00178e                  _main
+                  0x001718                  _TASK_100ms
+                  0x00171e                  _TASK_500ms
+                  0x001724                  _TASK_1000ms
+                  0x00174a                  _COM_vInit
+                  0x001750                  _COM_vSendMessage
+                  0x00175c                  _COM_vStartListening
+                  0x001764                  _COM_vProcessMessage
+                  0x00176c                  _COM_vProcessFIFO
+                  0x001794                  _QEI_vInit
+                  0x0017ca                  _QEI_u16getCount
+                  0x0017d2                  _QEI_vResetCount
+                  0x001804                  _initMotor
+                  0x00180c                  _miscareMotor
+                  0x001822                  ___delay32
+                  0x00183e                  _MCAL_vInit
+                  0x001854                  _OSC_vInit
+                  0x001864                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x001624                  _ADC_u16Read
-                  0x00160a                  _ADC_vInit
-                  0x001662                  _COM_vInit
-                  0x001684                  _COM_vProcessFIFO
-                  0x00167c                  _COM_vProcessMessage
-                  0x001668                  _COM_vSendMessage
-                  0x001674                  _COM_vStartListening
-                  0x000d40                  _GPIO_u16ReadPort
-                  0x000c88                  _GPIO_u8ReadPortPin
-                  0x000a66                  _GPIO_u8SetPortPin
-                  0x000bda                  _GPIO_u8WritePortPin
-                  0x000d0c                  _GPIO_vWritePort
-                  0x001522                  _INT0_vInit
-                  0x001542                  _INT1_vInit
-                  0x001568                  _INT2_vInit
-                  0x00150e                  _INT_vInit
-                  0x001768                  _MCAL_vInit
-                  0x00177e                  _OSC_vInit
-                  0x000d6a                  _PWM1_vInit
-                  0x000e20                  _PWM1_vSetDuty
-                  0x000f7e                  _PWM1_vSetDutyPeriod
-                  0x000de8                  _PWM1_vSetPeriod
-                  0x000dba                  _PWM2_vInit
-                  0x000f14                  _PWM2_vSetDuty
-                  0x000fa6                  _PWM2_vSetDutyPeriod
-                  0x000e04                  _PWM2_vSetPeriod
-                  0x0016e2                  _QEI_u16getCount
-                  0x0016ac                  _QEI_vInit
-                  0x0016ea                  _QEI_vResetCount
-                  0x0008d0                  _RF_u8Get_FifoStatus
-                  0x0008c2                  _RF_u8Get_ObsTx
-                  0x0008b4                  _RF_u8Get_Status
-                  0x000980                  _RF_vBeginReceive
-                  0x00092e                  _RF_vBeginTransmit
-                  0x0009de                  _RF_vCheckIRQ
-                  0x00064e                  _RF_vCloseAllPipes
-                  0x0007b2                  _RF_vDisableFeatureReg
-                  0x0007a4                  _RF_vEnableActivateReg
-                  0x000824                  _RF_vFirstPowerUp
-                  0x0008ec                  _RF_vFlushRX
-                  0x0008de                  _RF_vFlushTX
-                  0x000992                  _RF_vGetReceivedData
-                  0x000838                  _RF_vInit
-                  0x0008fa                  _RF_vLoadTxFIFO
-                  0x000664                  _RF_vOpenPipeZero
-                  0x00095e                  _RF_vSetRxMode
-                  0x0008a2                  _RF_vSetStandByMode
-                  0x00090a                  _RF_vSetTxMode
-                  0x000702                  _RF_vSet_AddressWidth
-                  0x0006be                  _RF_vSet_AutoAck
-                  0x000720                  _RF_vSet_AutoRetx
-                  0x0007c0                  _RF_vSet_PayloadLen
-                  0x0007e6                  _RF_vSet_PrimaryRxAddr
-                  0x000748                  _RF_vSet_RF_Channel
-                  0x00075e                  _RF_vSet_RF_Setup
-                  0x0007f4                  _RF_vSet_RxAddr
-                  0x00067a                  _RF_vSet_RxPipes
-                  0x0007d8                  _RF_vSet_TxAddr
-                  0x000814                  _RF_vSet_TxRxAddress
-                  0x00112c                  _SPI_RF_u8ReadReg_5Bytes
-                  0x000fd8                  _SPI_RF_u8RxBuffFull
-                  0x000fbc                  _SPI_RF_u8RxBuffOvf
-                  0x000fca                  _SPI_RF_u8TxBuffFull
-                  0x001050                  _SPI_RF_u8TxByte
-                  0x00107a                  _SPI_RF_u8TxByteByte
-                  0x0010c2                  _SPI_RF_u8TxCmd
-                  0x00118e                  _SPI_RF_u8WriteReg_5Bytes
-                  0x001042                  _SPI_RF_vDisable
-                  0x000fe6                  _SPI_RF_vInit
-                  0x001726                  _TASK_1000ms
-                  0x00171a                  _TASK_100ms
+                  0x0016b4                  _ADC_u16Read
+                  0x00169a                  _ADC_vInit
+                  0x00174a                  _COM_vInit
+                  0x00176c                  _COM_vProcessFIFO
+                  0x001764                  _COM_vProcessMessage
+                  0x001750                  _COM_vSendMessage
+                  0x00175c                  _COM_vStartListening
+                  0x000d6a                  _GPIO_u16ReadPort
+                  0x000cb2                  _GPIO_u8ReadPortPin
+                  0x000a90                  _GPIO_u8SetPortPin
+                  0x000c04                  _GPIO_u8WritePortPin
+                  0x000d36                  _GPIO_vWritePort
+                  0x00164e                  _Hal_vInit
+                  0x001634                  _Hal_vSetMotorDir
+                  0x001656                  _Hal_vSetMotorSpeed
+                  0x00154c                  _INT0_vInit
+                  0x00156c                  _INT1_vInit
+                  0x001592                  _INT2_vInit
+                  0x001538                  _INT_vInit
+                  0x00183e                  _MCAL_vInit
+                  0x001854                  _OSC_vInit
+                  0x000d94                  _PWM1_vInit
+                  0x000e4a                  _PWM1_vSetDuty
+                  0x000fa8                  _PWM1_vSetDutyPeriod
+                  0x000e12                  _PWM1_vSetPeriod
+                  0x000de4                  _PWM2_vInit
+                  0x000f3e                  _PWM2_vSetDuty
+                  0x000fd0                  _PWM2_vSetDutyPeriod
+                  0x000e2e                  _PWM2_vSetPeriod
+                  0x0017ca                  _QEI_u16getCount
+                  0x001794                  _QEI_vInit
+                  0x0017d2                  _QEI_vResetCount
+                  0x0008fa                  _RF_u8Get_FifoStatus
+                  0x0008ec                  _RF_u8Get_ObsTx
+                  0x0008de                  _RF_u8Get_Status
+                  0x0009aa                  _RF_vBeginReceive
+                  0x000958                  _RF_vBeginTransmit
+                  0x000a08                  _RF_vCheckIRQ
+                  0x000678                  _RF_vCloseAllPipes
+                  0x0007dc                  _RF_vDisableFeatureReg
+                  0x0007ce                  _RF_vEnableActivateReg
+                  0x00084e                  _RF_vFirstPowerUp
+                  0x000916                  _RF_vFlushRX
+                  0x000908                  _RF_vFlushTX
+                  0x0009bc                  _RF_vGetReceivedData
+                  0x000862                  _RF_vInit
+                  0x000924                  _RF_vLoadTxFIFO
+                  0x00068e                  _RF_vOpenPipeZero
+                  0x000988                  _RF_vSetRxMode
+                  0x0008cc                  _RF_vSetStandByMode
+                  0x000934                  _RF_vSetTxMode
+                  0x00072c                  _RF_vSet_AddressWidth
+                  0x0006e8                  _RF_vSet_AutoAck
+                  0x00074a                  _RF_vSet_AutoRetx
+                  0x0007ea                  _RF_vSet_PayloadLen
+                  0x000810                  _RF_vSet_PrimaryRxAddr
+                  0x000772                  _RF_vSet_RF_Channel
+                  0x000788                  _RF_vSet_RF_Setup
+                  0x00081e                  _RF_vSet_RxAddr
+                  0x0006a4                  _RF_vSet_RxPipes
+                  0x000802                  _RF_vSet_TxAddr
+                  0x00083e                  _RF_vSet_TxRxAddress
+                  0x001156                  _SPI_RF_u8ReadReg_5Bytes
+                  0x001002                  _SPI_RF_u8RxBuffFull
+                  0x000fe6                  _SPI_RF_u8RxBuffOvf
+                  0x000ff4                  _SPI_RF_u8TxBuffFull
+                  0x00107a                  _SPI_RF_u8TxByte
+                  0x0010a4                  _SPI_RF_u8TxByteByte
+                  0x0010ec                  _SPI_RF_u8TxCmd
+                  0x0011b8                  _SPI_RF_u8WriteReg_5Bytes
+                  0x00106c                  _SPI_RF_vDisable
+                  0x001010                  _SPI_RF_vInit
+                  0x001724                  _TASK_1000ms
+                  0x001718                  _TASK_100ms
                   0x001712                  _TASK_10ms
                   0x001706                  _TASK_1ms
-                  0x001720                  _TASK_500ms
+                  0x00171e                  _TASK_500ms
                   0x00170c                  _TASK_5ms
-                  0x0016f4                  _TASK_Inits
-                  0x001406                  _TASK_vSchedule
-                  0x001282                  _TIM2_u16GetCount
-                  0x0011ec                  _TIM2_vInit
-                  0x001230                  _TIM2_vResetCount
-                  0x001238                  _TIM2_vSetCount
-                  0x001244                  _TIM2_vSetCountLimit
-                  0x001250                  _TIM2_vSetCountLimit_1ms
-                  0x00125a                  _TIM2_vSetTime
-                  0x001216                  _TIM2_vStart
-                  0x001222                  _TIM2_vStop
-                  0x001312                  _TIM3_u16GetCount
-                  0x00128a                  _TIM3_vInit
-                  0x0012ca                  _TIM3_vResetCount
-                  0x0012d2                  _TIM3_vSetCount
-                  0x0012de                  _TIM3_vSetCountLimit
-                  0x0012ea                  _TIM3_vSetTime
-                  0x0012b0                  _TIM3_vStart
-                  0x0012bc                  _TIM3_vStop
-                  0x001388                  _TIM4_u16GetCount
-                  0x00131a                  _TIM4_vInit
-                  0x001368                  _TIM4_vResetCount
-                  0x001370                  _TIM4_vSetCount
-                  0x00137c                  _TIM4_vSetCountLimit
-                  0x00134e                  _TIM4_vStart
-                  0x00135a                  _TIM4_vStop
-                  0x0013fe                  _TIM5_u16GetCount
-                  0x001390                  _TIM5_vInit
-                  0x0013de                  _TIM5_vResetCount
-                  0x0013e6                  _TIM5_vSetCount
-                  0x0013f2                  _TIM5_vSetCountLimit
-                  0x0013c4                  _TIM5_vStart
-                  0x0013d0                  _TIM5_vStop
+                  0x0016f2                  _TASK_Inits
+                  0x001430                  _TASK_vSchedule
+                  0x0012ac                  _TIM2_u16GetCount
+                  0x001216                  _TIM2_vInit
+                  0x00125a                  _TIM2_vResetCount
+                  0x001262                  _TIM2_vSetCount
+                  0x00126e                  _TIM2_vSetCountLimit
+                  0x00127a                  _TIM2_vSetCountLimit_1ms
+                  0x001284                  _TIM2_vSetTime
+                  0x001240                  _TIM2_vStart
+                  0x00124c                  _TIM2_vStop
+                  0x00133c                  _TIM3_u16GetCount
+                  0x0012b4                  _TIM3_vInit
+                  0x0012f4                  _TIM3_vResetCount
+                  0x0012fc                  _TIM3_vSetCount
+                  0x001308                  _TIM3_vSetCountLimit
+                  0x001314                  _TIM3_vSetTime
+                  0x0012da                  _TIM3_vStart
+                  0x0012e6                  _TIM3_vStop
+                  0x0013b2                  _TIM4_u16GetCount
+                  0x001344                  _TIM4_vInit
+                  0x001392                  _TIM4_vResetCount
+                  0x00139a                  _TIM4_vSetCount
+                  0x0013a6                  _TIM4_vSetCountLimit
+                  0x001378                  _TIM4_vStart
+                  0x001384                  _TIM4_vStop
+                  0x001428                  _TIM5_u16GetCount
+                  0x0013ba                  _TIM5_vInit
+                  0x001408                  _TIM5_vResetCount
+                  0x001410                  _TIM5_vSetCount
+                  0x00141c                  _TIM5_vSetCountLimit
+                  0x0013ee                  _TIM5_vStart
+                  0x0013fa                  _TIM5_vStop
                   0x000322                  __DefaultInterrupt
                   0x0002c8                  __INT0Interrupt
                   0x0002ce                  __INT1Interrupt
@@ -437,36 +461,42 @@ External Symbols in Program Memory (by name):
                   0x000312                  __T4Interrupt
                   0x00031a                  __T5Interrupt
                   0x00032a                  ___addsf3
-                  0x00174c                  ___delay32
+                  0x001822                  ___delay32
                   0x0003e4                  ___divsf3
                   0x000468                  ___eqsf2
-                  0x00046c                  ___fixunssfsi
-                  0x0005ea                  ___floatundisf
-                  0x0004a2                  ___floatunsisf
+                  0x000470                  ___fixunssfsi
+                  0x0005f4                  ___floatdisf
+                  0x0004a6                  ___floatsisf
+                  0x000614                  ___floatundisf
+                  0x0004ac                  ___floatunsisf
+                  0x00046c                  ___gesf2
+                  0x00046c                  ___gtsf2
                   0x000468                  ___lesf2
                   0x000468                  ___ltsf2
-                  0x00054c                  ___mulsf3
+                  0x000556                  ___mulsf3
                   0x000328                  ___subsf3
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
-                  0x00052c                  __fPropagateNaN
-                  0x00053e                  __fbopExit
-                  0x000546                  __fbopReturnNaN
-                  0x0005b4                  __fcompare
-                  0x0004a6                  __fpack
-                  0x0004f2                  __funpack
-                  0x00051c                  __funpack2
+                  0x000536                  __fPropagateNaN
+                  0x000548                  __fbopExit
+                  0x000550                  __fbopReturnNaN
+                  0x0005be                  __fcompare
+                  0x0004b0                  __fpack
+                  0x0004fc                  __funpack
+                  0x000526                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001594                  _aprindere
-                  0x0015dc                  _aprindere2
-                  0x00178e                  _main
-                  0x00149c                  _test_pin_setup
-                  0x000a28                  _test_vReceiver
-                  0x0014ce                  _test_vToggle_CE
-                  0x0014ae                  _test_vToggle_CSN
-                  0x0014ee                  _test_vToggle_IRQ
-                  0x000a5c                  _test_vTransmitter
+                  0x0015be                  _aprindere
+                  0x001606                  _aprindere2
+                  0x001804                  _initMotor
+                  0x001864                  _main
+                  0x00180c                  _miscareMotor
+                  0x0014c6                  _test_pin_setup
+                  0x000a52                  _test_vReceiver
+                  0x0014f8                  _test_vToggle_CE
+                  0x0014d8                  _test_vToggle_CSN
+                  0x001518                  _test_vToggle_IRQ
+                  0x000a86                  _test_vTransmitter
 
 Memory Configuration
 
@@ -508,6 +538,8 @@ LOAD build/default/production/mcal_timers.o
 LOAD build/default/production/sys_schedule.o
 LOAD build/default/production/sys_tasks.o
 LOAD build/default/production/toggle.o
+LOAD build/default/production/hal_dc.o
+LOAD build/default/production/asw_move.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p33FJ128MC804
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
@@ -539,7 +571,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x448
+.text             0x000200        0x472
  *(.init)
  .init            0x000200         0x4c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -579,36 +611,45 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
                   0x000468                  ___eqsf2
                   0x000468                  ___ltsf2
                   0x000468                  ___lesf2
+ .libm.gtsf2      0x00046c          0x4 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                  0x00046c                  ___gesf2
+                  0x00046c                  ___gtsf2
  .libm.fixunssfsi
-                  0x00046c         0x36 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                  0x00046c                  ___fixunssfsi
+                  0x000470         0x36 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000470                  ___fixunssfsi
+ .libm.floatsisf
+                  0x0004a6          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x0004a6                  ___floatsisf
  .libm.floatunsisf
-                  0x0004a2          0x4 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                  0x0004a2                  ___floatunsisf
- .libm.fpack      0x0004a6         0x4c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fpack.eo)
-                  0x0004a6                  __fpack
- .libm.funpack    0x0004f2         0x2a c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack.eo)
-                  0x0004f2                  __funpack
+                  0x0004ac          0x4 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x0004ac                  ___floatunsisf
+ .libm.fpack      0x0004b0         0x4c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x0004b0                  __fpack
+ .libm.funpack    0x0004fc         0x2a c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x0004fc                  __funpack
  .libm.funpack2
-                  0x00051c         0x10 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack2.eo)
-                  0x00051c                  __funpack2
+                  0x000526         0x10 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000526                  __funpack2
  .libm.fPropagateNaN
-                  0x00052c         0x12 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00052c                  __fPropagateNaN
+                  0x000536         0x12 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000536                  __fPropagateNaN
  .libm.fbobExit
-                  0x00053e          0x8 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00053e                  __fbopExit
+                  0x000548          0x8 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000548                  __fbopExit
  .libm.fbopReturnNaN
-                  0x000546          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000546                  __fbopReturnNaN
- .libm.mulsf3     0x00054c         0x68 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                  0x00054c                  ___mulsf3
+                  0x000550          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000550                  __fbopReturnNaN
+ .libm.mulsf3     0x000556         0x68 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000556                  ___mulsf3
  .libm.fcompare
-                  0x0005b4         0x36 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fcompare.eo)
-                  0x0005b4                  __fcompare
+                  0x0005be         0x36 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x0005be                  __fcompare
+ .libm.floatdisf
+                  0x0005f4         0x20 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                  0x0005f4                  ___floatdisf
  .libm.floatundisf
-                  0x0005ea         0x5e c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
-                  0x0005ea                  ___floatundisf
+                  0x000614         0x5e c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000614                  ___floatundisf
 
 usercode
  *(usercode)
@@ -652,26 +693,28 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x823b
+.debug_info       0x000000       0x864c
  *(.debug_info)
- .debug_info      0x000000        0x2b6 build/default/production/asw_com.o
- .debug_info      0x0002b6        0x901 build/default/production/hal_nRF.o
- .debug_info      0x000bb7         0x97 build/default/production/main.o
- .debug_info      0x000c4e        0x789 build/default/production/mcal_adc.o
- .debug_info      0x0013d7        0x9b9 build/default/production/mcal_encoder.o
- .debug_info      0x001d90        0x451 build/default/production/mcal_gpio.o
- .debug_info      0x0021e1        0x14f build/default/production/mcal_init.o
- .debug_info      0x002330       0x1252 build/default/production/mcal_interrupts.o
- .debug_info      0x003582        0x25c build/default/production/mcal_osc.o
- .debug_info      0x0037de        0xcb2 build/default/production/mcal_pwm.o
- .debug_info      0x004490       0x118e build/default/production/mcal_spi.o
- .debug_info      0x00561e       0x1a5c build/default/production/mcal_timers.o
- .debug_info      0x00707a        0xde5 build/default/production/sys_schedule.o
- .debug_info      0x007e5f        0x202 build/default/production/sys_tasks.o
- .debug_info      0x008061        0x1da build/default/production/toggle.o
+ .debug_info      0x000000        0x2ba build/default/production/asw_com.o
+ .debug_info      0x0002ba        0x905 build/default/production/hal_nRF.o
+ .debug_info      0x000bbf         0x9b build/default/production/main.o
+ .debug_info      0x000c5a        0x78d build/default/production/mcal_adc.o
+ .debug_info      0x0013e7        0x9bd build/default/production/mcal_encoder.o
+ .debug_info      0x001da4        0x455 build/default/production/mcal_gpio.o
+ .debug_info      0x0021f9        0x153 build/default/production/mcal_init.o
+ .debug_info      0x00234c       0x1256 build/default/production/mcal_interrupts.o
+ .debug_info      0x0035a2        0x260 build/default/production/mcal_osc.o
+ .debug_info      0x003802        0xcb6 build/default/production/mcal_pwm.o
+ .debug_info      0x0044b8       0x1192 build/default/production/mcal_spi.o
+ .debug_info      0x00564a       0x1a60 build/default/production/mcal_timers.o
+ .debug_info      0x0070aa        0xde9 build/default/production/sys_schedule.o
+ .debug_info      0x007e93        0x20a build/default/production/sys_tasks.o
+ .debug_info      0x00809d        0x1de build/default/production/toggle.o
+ .debug_info      0x00827b        0x1fc build/default/production/hal_dc.o
+ .debug_info      0x008477        0x1d5 build/default/production/asw_move.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0xd71
+.debug_abbrev     0x000000        0xe73
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xc7 build/default/production/asw_com.o
  .debug_abbrev    0x0000c7        0x1a0 build/default/production/hal_nRF.o
@@ -686,10 +729,12 @@ __FUID3
  .debug_abbrev    0x000883        0x174 build/default/production/mcal_spi.o
  .debug_abbrev    0x0009f7        0x1d2 build/default/production/mcal_timers.o
  .debug_abbrev    0x000bc9         0xc4 build/default/production/sys_schedule.o
- .debug_abbrev    0x000c8d         0x61 build/default/production/sys_tasks.o
- .debug_abbrev    0x000cee         0x83 build/default/production/toggle.o
+ .debug_abbrev    0x000c8d         0x56 build/default/production/sys_tasks.o
+ .debug_abbrev    0x000ce3         0x83 build/default/production/toggle.o
+ .debug_abbrev    0x000d66         0x92 build/default/production/hal_dc.o
+ .debug_abbrev    0x000df8         0x7b build/default/production/asw_move.o
 
-.debug_line       0x000000        0xec7
+.debug_line       0x000000        0xf6e
  *(.debug_line)
  .debug_line      0x000000         0x5a build/default/production/asw_com.o
  .debug_line      0x00005a        0x150 build/default/production/hal_nRF.o
@@ -704,10 +749,12 @@ __FUID3
  .debug_line      0x000969        0x17f build/default/production/mcal_spi.o
  .debug_line      0x000ae8        0x1f4 build/default/production/mcal_timers.o
  .debug_line      0x000cdc        0x14a build/default/production/sys_schedule.o
- .debug_line      0x000e26         0x48 build/default/production/sys_tasks.o
- .debug_line      0x000e6e         0x59 build/default/production/toggle.o
+ .debug_line      0x000e26         0x4c build/default/production/sys_tasks.o
+ .debug_line      0x000e72         0x59 build/default/production/toggle.o
+ .debug_line      0x000ecb         0x55 build/default/production/hal_dc.o
+ .debug_line      0x000f20         0x4e build/default/production/asw_move.o
 
-.debug_frame      0x000000        0xee6
+.debug_frame      0x000000        0xfa0
  *(.debug_frame)
  .debug_frame     0x000000         0xa0 build/default/production/asw_com.o
  .debug_frame     0x0000a0        0x39a build/default/production/hal_nRF.o
@@ -724,8 +771,10 @@ __FUID3
  .debug_frame     0x000d22         0xa0 build/default/production/sys_schedule.o
  .debug_frame     0x000dc2         0xd8 build/default/production/sys_tasks.o
  .debug_frame     0x000e9a         0x4c build/default/production/toggle.o
+ .debug_frame     0x000ee6         0x6e build/default/production/hal_dc.o
+ .debug_frame     0x000f54         0x4c build/default/production/asw_move.o
 
-.debug_str        0x000000        0x435
+.debug_str        0x000000        0x441
  *(.debug_str)
  .debug_str       0x000000         0x23 build/default/production/asw_com.o
  .debug_str       0x000023         0x4d build/default/production/hal_nRF.o
@@ -738,7 +787,8 @@ __FUID3
  .debug_str       0x0001e0         0x86 build/default/production/mcal_spi.o
  .debug_str       0x000266         0xeb build/default/production/mcal_timers.o
  .debug_str       0x000351         0xda build/default/production/sys_schedule.o
- .debug_str       0x00042b          0xa build/default/production/toggle.o
+ .debug_str       0x00042b          0xc build/default/production/sys_tasks.o
+ .debug_str       0x000437          0xa build/default/production/toggle.o
 
 .debug_loc
  *(.debug_loc)
@@ -747,7 +797,7 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0xb72
+                  0x000000        0xbff
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x7a build/default/production/asw_com.o
@@ -776,14 +826,18 @@ __FUID3
  .debug_pubnames
                   0x0009d6         0xc8 build/default/production/sys_schedule.o
  .debug_pubnames
-                  0x000a9e         0x77 build/default/production/sys_tasks.o
+                  0x000a9e         0x87 build/default/production/sys_tasks.o
  .debug_pubnames
-                  0x000b15         0x5d build/default/production/toggle.o
+                  0x000b25         0x5d build/default/production/toggle.o
+ .debug_pubnames
+                  0x000b82         0x4c build/default/production/hal_dc.o
+ .debug_pubnames
+                  0x000bce         0x31 build/default/production/asw_move.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x168
+.debug_aranges    0x000000        0x198
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/asw_com.o
@@ -815,6 +869,10 @@ __FUID3
                   0x000138         0x18 build/default/production/sys_tasks.o
  .debug_aranges
                   0x000150         0x18 build/default/production/toggle.o
+ .debug_aranges
+                  0x000168         0x18 build/default/production/hal_dc.o
+ .debug_aranges
+                  0x000180         0x18 build/default/production/asw_move.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1932,98 +1990,112 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000168        0x9f1
+                  0x000198        0xa4f
  .debug_pubtypes
-                  0x000168         0x2e build/default/production/asw_com.o
+                  0x000198         0x2e build/default/production/asw_com.o
  .debug_pubtypes
-                  0x000196         0x3e build/default/production/hal_nRF.o
+                  0x0001c6         0x3e build/default/production/hal_nRF.o
  .debug_pubtypes
-                  0x0001d4         0xbc build/default/production/mcal_adc.o
+                  0x000204         0xbc build/default/production/mcal_adc.o
  .debug_pubtypes
-                  0x000290         0xce build/default/production/mcal_encoder.o
+                  0x0002c0         0xce build/default/production/mcal_encoder.o
  .debug_pubtypes
-                  0x00035e         0x45 build/default/production/mcal_gpio.o
+                  0x00038e         0x45 build/default/production/mcal_gpio.o
  .debug_pubtypes
-                  0x0003a3         0x12 build/default/production/mcal_init.o
+                  0x0003d3         0x12 build/default/production/mcal_init.o
  .debug_pubtypes
-                  0x0003b5        0x18e build/default/production/mcal_interrupts.o
+                  0x0003e5        0x18e build/default/production/mcal_interrupts.o
  .debug_pubtypes
-                  0x000543         0x40 build/default/production/mcal_osc.o
+                  0x000573         0x40 build/default/production/mcal_osc.o
  .debug_pubtypes
-                  0x000583        0x129 build/default/production/mcal_pwm.o
+                  0x0005b3        0x129 build/default/production/mcal_pwm.o
  .debug_pubtypes
-                  0x0006ac        0x17f build/default/production/mcal_spi.o
+                  0x0006dc        0x17f build/default/production/mcal_spi.o
  .debug_pubtypes
-                  0x00082b        0x1b3 build/default/production/mcal_timers.o
+                  0x00085b        0x1b3 build/default/production/mcal_timers.o
  .debug_pubtypes
-                  0x0009de        0x14d build/default/production/sys_schedule.o
+                  0x000a0e        0x14d build/default/production/sys_schedule.o
  .debug_pubtypes
-                  0x000b2b         0x12 build/default/production/sys_tasks.o
+                  0x000b5b         0x12 build/default/production/sys_tasks.o
  .debug_pubtypes
-                  0x000b3d         0x1c build/default/production/toggle.o
+                  0x000b6d         0x1c build/default/production/toggle.o
+ .debug_pubtypes
+                  0x000b89         0x2f build/default/production/hal_dc.o
+ .debug_pubtypes
+                  0x000bb8         0x2f build/default/production/asw_move.o
 
 __c30_signature
-                  0x000b59         0xb4
+                  0x000be7         0xd2
  __c30_signature
-                  0x000b59          0x6 build/default/production/asw_com.o
+                  0x000be7          0x6 build/default/production/asw_com.o
  __c30_signature
-                  0x000b5f          0x6 build/default/production/hal_nRF.o
+                  0x000bed          0x6 build/default/production/hal_nRF.o
  __c30_signature
-                  0x000b65          0x6 build/default/production/main.o
+                  0x000bf3          0x6 build/default/production/main.o
  __c30_signature
-                  0x000b6b          0x6 build/default/production/mcal_adc.o
+                  0x000bf9          0x6 build/default/production/mcal_adc.o
  __c30_signature
-                  0x000b71          0x6 build/default/production/mcal_encoder.o
+                  0x000bff          0x6 build/default/production/mcal_encoder.o
  __c30_signature
-                  0x000b77          0x6 build/default/production/mcal_gpio.o
+                  0x000c05          0x6 build/default/production/mcal_gpio.o
  __c30_signature
-                  0x000b7d          0x6 build/default/production/mcal_init.o
+                  0x000c0b          0x6 build/default/production/mcal_init.o
  __c30_signature
-                  0x000b83          0x6 build/default/production/mcal_interrupts.o
+                  0x000c11          0x6 build/default/production/mcal_interrupts.o
  __c30_signature
-                  0x000b89          0x6 build/default/production/mcal_osc.o
+                  0x000c17          0x6 build/default/production/mcal_osc.o
  __c30_signature
-                  0x000b8f          0x6 build/default/production/mcal_pwm.o
+                  0x000c1d          0x6 build/default/production/mcal_pwm.o
  __c30_signature
-                  0x000b95          0x6 build/default/production/mcal_spi.o
+                  0x000c23          0x6 build/default/production/mcal_spi.o
  __c30_signature
-                  0x000b9b          0x6 build/default/production/mcal_timers.o
+                  0x000c29          0x6 build/default/production/mcal_timers.o
  __c30_signature
-                  0x000ba1          0x6 build/default/production/sys_schedule.o
+                  0x000c2f          0x6 build/default/production/sys_schedule.o
  __c30_signature
-                  0x000ba7          0x6 build/default/production/sys_tasks.o
+                  0x000c35          0x6 build/default/production/sys_tasks.o
  __c30_signature
-                  0x000bad          0x6 build/default/production/toggle.o
+                  0x000c3b          0x6 build/default/production/toggle.o
  __c30_signature
-                  0x000bb3          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000c41          0x6 build/default/production/hal_dc.o
  __c30_signature
-                  0x000bb9          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000c47          0x6 build/default/production/asw_move.o
  __c30_signature
-                  0x000bbf          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x000c4d          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000bc5          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x000c53          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x000bcb          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x000c59          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
  __c30_signature
-                  0x000bd1          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                  0x000c5f          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(addsf3.eo)
  __c30_signature
-                  0x000bd7          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000c65          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x000bdd          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000c6b          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(feqltle.eo)
  __c30_signature
-                  0x000be3          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x000c71          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fgtge.eo)
  __c30_signature
-                  0x000be9          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000c77          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x000bef          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000c7d          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
  __c30_signature
-                  0x000bf5          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000c83          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x000bfb          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000c89          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000c01          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x000c8f          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x000c07          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000c95          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+ __c30_signature
+                  0x000c9b          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(futil.eo)
+ __c30_signature
+                  0x000ca1          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+ __c30_signature
+                  0x000ca7          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+ __c30_signature
+                  0x000cad          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+ __c30_signature
+                  0x000cb3          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
 
 .nbss               0x0800         0x20
  .nbss              0x0800          0x8 build/default/production/hal_nRF.o
@@ -2047,9 +2119,13 @@ __c30_signature
                     0x081c                  _cnt1
                     0x081e                  _stare_led1
 
-.bss                0x0820         0x20
- .bss               0x0820         0x20 build/default/production/hal_nRF.o
-                    0x0820                  _au8RxBuff
+.ndata              0x0820          0x2
+ .ndata             0x0820          0x2 build/default/production/sys_tasks.o
+                    0x0820                  _cntDirectie
+
+.bss                0x0822         0x20
+ .bss               0x0822         0x20 build/default/production/hal_nRF.o
+                    0x0822                  _au8RxBuff
 
 .config_JTAGEN    0xf8000e          0x2
  .config_JTAGEN
@@ -2093,148 +2169,157 @@ __c30_signature
  .ivt._T5Interrupt
                   0x00004c          0x2 build/default/production/mcal_timers.o
 
-.const              0x8648          0x6 load address 0x000648  
- .const             0x8648          0x6 build/default/production/hal_nRF.o
+.const              0x8672          0x6 load address 0x000672  
+ .const             0x8672          0x6 build/default/production/hal_nRF.o
 
-.text             0x00064e       0x10de
- .text            0x00064e        0x418 build/default/production/hal_nRF.o
-                  0x00064e                  _RF_vCloseAllPipes
-                  0x000664                  _RF_vOpenPipeZero
-                  0x00067a                  _RF_vSet_RxPipes
-                  0x0006be                  _RF_vSet_AutoAck
-                  0x000702                  _RF_vSet_AddressWidth
-                  0x000720                  _RF_vSet_AutoRetx
-                  0x000748                  _RF_vSet_RF_Channel
-                  0x00075e                  _RF_vSet_RF_Setup
-                  0x0007a4                  _RF_vEnableActivateReg
-                  0x0007b2                  _RF_vDisableFeatureReg
-                  0x0007c0                  _RF_vSet_PayloadLen
-                  0x0007d8                  _RF_vSet_TxAddr
-                  0x0007e6                  _RF_vSet_PrimaryRxAddr
-                  0x0007f4                  _RF_vSet_RxAddr
-                  0x000814                  _RF_vSet_TxRxAddress
-                  0x000824                  _RF_vFirstPowerUp
-                  0x000838                  _RF_vInit
-                  0x0008a2                  _RF_vSetStandByMode
-                  0x0008b4                  _RF_u8Get_Status
-                  0x0008c2                  _RF_u8Get_ObsTx
-                  0x0008d0                  _RF_u8Get_FifoStatus
-                  0x0008de                  _RF_vFlushTX
-                  0x0008ec                  _RF_vFlushRX
-                  0x0008fa                  _RF_vLoadTxFIFO
-                  0x00090a                  _RF_vSetTxMode
-                  0x00092e                  _RF_vBeginTransmit
-                  0x00095e                  _RF_vSetRxMode
-                  0x000980                  _RF_vBeginReceive
-                  0x000992                  _RF_vGetReceivedData
-                  0x0009de                  _RF_vCheckIRQ
-                  0x000a28                  _test_vReceiver
-                  0x000a5c                  _test_vTransmitter
- .text            0x000a66        0x304 build/default/production/mcal_gpio.o
-                  0x000a66                  _GPIO_u8SetPortPin
-                  0x000bda                  _GPIO_u8WritePortPin
-                  0x000c88                  _GPIO_u8ReadPortPin
-                  0x000d0c                  _GPIO_vWritePort
-                  0x000d40                  _GPIO_u16ReadPort
- .text            0x000d6a        0x252 build/default/production/mcal_pwm.o
-                  0x000d6a                  _PWM1_vInit
-                  0x000dba                  _PWM2_vInit
-                  0x000de8                  _PWM1_vSetPeriod
-                  0x000e04                  _PWM2_vSetPeriod
-                  0x000e20                  _PWM1_vSetDuty
-                  0x000f14                  _PWM2_vSetDuty
-                  0x000f7e                  _PWM1_vSetDutyPeriod
-                  0x000fa6                  _PWM2_vSetDutyPeriod
- .text            0x000fbc        0x230 build/default/production/mcal_spi.o
-                  0x000fbc                  _SPI_RF_u8RxBuffOvf
-                  0x000fca                  _SPI_RF_u8TxBuffFull
-                  0x000fd8                  _SPI_RF_u8RxBuffFull
-                  0x000fe6                  _SPI_RF_vInit
-                  0x001042                  _SPI_RF_vDisable
-                  0x001050                  _SPI_RF_u8TxByte
-                  0x00107a                  _SPI_RF_u8TxByteByte
-                  0x0010c2                  _SPI_RF_u8TxCmd
-                  0x00112c                  _SPI_RF_u8ReadReg_5Bytes
-                  0x00118e                  _SPI_RF_u8WriteReg_5Bytes
- .text            0x0011ec        0x21a build/default/production/mcal_timers.o
-                  0x0011ec                  _TIM2_vInit
-                  0x001216                  _TIM2_vStart
-                  0x001222                  _TIM2_vStop
-                  0x001230                  _TIM2_vResetCount
-                  0x001238                  _TIM2_vSetCount
-                  0x001244                  _TIM2_vSetCountLimit
-                  0x001250                  _TIM2_vSetCountLimit_1ms
-                  0x00125a                  _TIM2_vSetTime
-                  0x001282                  _TIM2_u16GetCount
-                  0x00128a                  _TIM3_vInit
-                  0x0012b0                  _TIM3_vStart
-                  0x0012bc                  _TIM3_vStop
-                  0x0012ca                  _TIM3_vResetCount
-                  0x0012d2                  _TIM3_vSetCount
-                  0x0012de                  _TIM3_vSetCountLimit
-                  0x0012ea                  _TIM3_vSetTime
-                  0x001312                  _TIM3_u16GetCount
-                  0x00131a                  _TIM4_vInit
-                  0x00134e                  _TIM4_vStart
-                  0x00135a                  _TIM4_vStop
-                  0x001368                  _TIM4_vResetCount
-                  0x001370                  _TIM4_vSetCount
-                  0x00137c                  _TIM4_vSetCountLimit
-                  0x001388                  _TIM4_u16GetCount
-                  0x001390                  _TIM5_vInit
-                  0x0013c4                  _TIM5_vStart
-                  0x0013d0                  _TIM5_vStop
-                  0x0013de                  _TIM5_vResetCount
-                  0x0013e6                  _TIM5_vSetCount
-                  0x0013f2                  _TIM5_vSetCountLimit
-                  0x0013fe                  _TIM5_u16GetCount
- .text            0x001406        0x108 build/default/production/sys_schedule.o
-                  0x001406                  _TASK_vSchedule
-                  0x00149c                  _test_pin_setup
-                  0x0014ae                  _test_vToggle_CSN
-                  0x0014ce                  _test_vToggle_CE
-                  0x0014ee                  _test_vToggle_IRQ
- .text            0x00150e         0x86 build/default/production/mcal_interrupts.o
-                  0x00150e                  _INT_vInit
-                  0x001522                  _INT0_vInit
-                  0x001542                  _INT1_vInit
-                  0x001568                  _INT2_vInit
- .text            0x001594         0x76 build/default/production/toggle.o
-                  0x001594                  _aprindere
-                  0x0015dc                  _aprindere2
- .text            0x00160a         0x58 build/default/production/mcal_adc.o
-                  0x00160a                  _ADC_vInit
-                  0x001624                  _ADC_u16Read
- .text            0x001662         0x4a build/default/production/asw_com.o
-                  0x001662                  _COM_vInit
-                  0x001668                  _COM_vSendMessage
-                  0x001674                  _COM_vStartListening
-                  0x00167c                  _COM_vProcessMessage
-                  0x001684                  _COM_vProcessFIFO
- .text            0x0016ac         0x48 build/default/production/mcal_encoder.o
-                  0x0016ac                  _QEI_vInit
-                  0x0016e2                  _QEI_u16getCount
-                  0x0016ea                  _QEI_vResetCount
- .text            0x0016f4         0x38 build/default/production/sys_tasks.o
-                  0x0016f4                  _TASK_Inits
+.text             0x000678       0x1164
+ .text            0x000678        0x418 build/default/production/hal_nRF.o
+                  0x000678                  _RF_vCloseAllPipes
+                  0x00068e                  _RF_vOpenPipeZero
+                  0x0006a4                  _RF_vSet_RxPipes
+                  0x0006e8                  _RF_vSet_AutoAck
+                  0x00072c                  _RF_vSet_AddressWidth
+                  0x00074a                  _RF_vSet_AutoRetx
+                  0x000772                  _RF_vSet_RF_Channel
+                  0x000788                  _RF_vSet_RF_Setup
+                  0x0007ce                  _RF_vEnableActivateReg
+                  0x0007dc                  _RF_vDisableFeatureReg
+                  0x0007ea                  _RF_vSet_PayloadLen
+                  0x000802                  _RF_vSet_TxAddr
+                  0x000810                  _RF_vSet_PrimaryRxAddr
+                  0x00081e                  _RF_vSet_RxAddr
+                  0x00083e                  _RF_vSet_TxRxAddress
+                  0x00084e                  _RF_vFirstPowerUp
+                  0x000862                  _RF_vInit
+                  0x0008cc                  _RF_vSetStandByMode
+                  0x0008de                  _RF_u8Get_Status
+                  0x0008ec                  _RF_u8Get_ObsTx
+                  0x0008fa                  _RF_u8Get_FifoStatus
+                  0x000908                  _RF_vFlushTX
+                  0x000916                  _RF_vFlushRX
+                  0x000924                  _RF_vLoadTxFIFO
+                  0x000934                  _RF_vSetTxMode
+                  0x000958                  _RF_vBeginTransmit
+                  0x000988                  _RF_vSetRxMode
+                  0x0009aa                  _RF_vBeginReceive
+                  0x0009bc                  _RF_vGetReceivedData
+                  0x000a08                  _RF_vCheckIRQ
+                  0x000a52                  _test_vReceiver
+                  0x000a86                  _test_vTransmitter
+ .text            0x000a90        0x304 build/default/production/mcal_gpio.o
+                  0x000a90                  _GPIO_u8SetPortPin
+                  0x000c04                  _GPIO_u8WritePortPin
+                  0x000cb2                  _GPIO_u8ReadPortPin
+                  0x000d36                  _GPIO_vWritePort
+                  0x000d6a                  _GPIO_u16ReadPort
+ .text            0x000d94        0x252 build/default/production/mcal_pwm.o
+                  0x000d94                  _PWM1_vInit
+                  0x000de4                  _PWM2_vInit
+                  0x000e12                  _PWM1_vSetPeriod
+                  0x000e2e                  _PWM2_vSetPeriod
+                  0x000e4a                  _PWM1_vSetDuty
+                  0x000f3e                  _PWM2_vSetDuty
+                  0x000fa8                  _PWM1_vSetDutyPeriod
+                  0x000fd0                  _PWM2_vSetDutyPeriod
+ .text            0x000fe6        0x230 build/default/production/mcal_spi.o
+                  0x000fe6                  _SPI_RF_u8RxBuffOvf
+                  0x000ff4                  _SPI_RF_u8TxBuffFull
+                  0x001002                  _SPI_RF_u8RxBuffFull
+                  0x001010                  _SPI_RF_vInit
+                  0x00106c                  _SPI_RF_vDisable
+                  0x00107a                  _SPI_RF_u8TxByte
+                  0x0010a4                  _SPI_RF_u8TxByteByte
+                  0x0010ec                  _SPI_RF_u8TxCmd
+                  0x001156                  _SPI_RF_u8ReadReg_5Bytes
+                  0x0011b8                  _SPI_RF_u8WriteReg_5Bytes
+ .text            0x001216        0x21a build/default/production/mcal_timers.o
+                  0x001216                  _TIM2_vInit
+                  0x001240                  _TIM2_vStart
+                  0x00124c                  _TIM2_vStop
+                  0x00125a                  _TIM2_vResetCount
+                  0x001262                  _TIM2_vSetCount
+                  0x00126e                  _TIM2_vSetCountLimit
+                  0x00127a                  _TIM2_vSetCountLimit_1ms
+                  0x001284                  _TIM2_vSetTime
+                  0x0012ac                  _TIM2_u16GetCount
+                  0x0012b4                  _TIM3_vInit
+                  0x0012da                  _TIM3_vStart
+                  0x0012e6                  _TIM3_vStop
+                  0x0012f4                  _TIM3_vResetCount
+                  0x0012fc                  _TIM3_vSetCount
+                  0x001308                  _TIM3_vSetCountLimit
+                  0x001314                  _TIM3_vSetTime
+                  0x00133c                  _TIM3_u16GetCount
+                  0x001344                  _TIM4_vInit
+                  0x001378                  _TIM4_vStart
+                  0x001384                  _TIM4_vStop
+                  0x001392                  _TIM4_vResetCount
+                  0x00139a                  _TIM4_vSetCount
+                  0x0013a6                  _TIM4_vSetCountLimit
+                  0x0013b2                  _TIM4_u16GetCount
+                  0x0013ba                  _TIM5_vInit
+                  0x0013ee                  _TIM5_vStart
+                  0x0013fa                  _TIM5_vStop
+                  0x001408                  _TIM5_vResetCount
+                  0x001410                  _TIM5_vSetCount
+                  0x00141c                  _TIM5_vSetCountLimit
+                  0x001428                  _TIM5_u16GetCount
+ .text            0x001430        0x108 build/default/production/sys_schedule.o
+                  0x001430                  _TASK_vSchedule
+                  0x0014c6                  _test_pin_setup
+                  0x0014d8                  _test_vToggle_CSN
+                  0x0014f8                  _test_vToggle_CE
+                  0x001518                  _test_vToggle_IRQ
+ .text            0x001538         0x86 build/default/production/mcal_interrupts.o
+                  0x001538                  _INT_vInit
+                  0x00154c                  _INT0_vInit
+                  0x00156c                  _INT1_vInit
+                  0x001592                  _INT2_vInit
+ .text            0x0015be         0x76 build/default/production/toggle.o
+                  0x0015be                  _aprindere
+                  0x001606                  _aprindere2
+ .text            0x001634         0x66 build/default/production/hal_dc.o
+                  0x001634                  _Hal_vSetMotorDir
+                  0x00164e                  _Hal_vInit
+                  0x001656                  _Hal_vSetMotorSpeed
+ .text            0x00169a         0x58 build/default/production/mcal_adc.o
+                  0x00169a                  _ADC_vInit
+                  0x0016b4                  _ADC_u16Read
+ .text            0x0016f2         0x58 build/default/production/sys_tasks.o
+                  0x0016f2                  _TASK_Inits
                   0x001706                  _TASK_1ms
                   0x00170c                  _TASK_5ms
                   0x001712                  _TASK_10ms
-                  0x00171a                  _TASK_100ms
-                  0x001720                  _TASK_500ms
-                  0x001726                  _TASK_1000ms
+                  0x001718                  _TASK_100ms
+                  0x00171e                  _TASK_500ms
+                  0x001724                  _TASK_1000ms
+ .text            0x00174a         0x4a build/default/production/asw_com.o
+                  0x00174a                  _COM_vInit
+                  0x001750                  _COM_vSendMessage
+                  0x00175c                  _COM_vStartListening
+                  0x001764                  _COM_vProcessMessage
+                  0x00176c                  _COM_vProcessFIFO
+ .text            0x001794         0x48 build/default/production/mcal_encoder.o
+                  0x001794                  _QEI_vInit
+                  0x0017ca                  _QEI_u16getCount
+                  0x0017d2                  _QEI_vResetCount
 
-.dinit            0x00172c         0x20
- .dinit           0x00172c         0x20 data_init
+.dinit            0x0017dc         0x28
+ .dinit           0x0017dc         0x28 data_init
 
-.init.delay32     0x00174c         0x1c
- .init.delay32    0x00174c         0x1c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x00174c                  ___delay32
+.text             0x001804         0x1e
+ .text            0x001804         0x1e build/default/production/asw_move.o
+                  0x001804                  _initMotor
+                  0x00180c                  _miscareMotor
 
-.text             0x001768         0x2e
- .text            0x001768         0x16 build/default/production/mcal_init.o
-                  0x001768                  _MCAL_vInit
- .text            0x00177e         0x10 build/default/production/mcal_osc.o
-                  0x00177e                  _OSC_vInit
- .text            0x00178e          0x8 build/default/production/main.o
-                  0x00178e                  _main
+.init.delay32     0x001822         0x1c
+ .init.delay32    0x001822         0x1c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x001822                  ___delay32
+
+.text             0x00183e         0x2e
+ .text            0x00183e         0x16 build/default/production/mcal_init.o
+                  0x00183e                  _MCAL_vInit
+ .text            0x001854         0x10 build/default/production/mcal_osc.o
+                  0x001854                  _OSC_vInit
+ .text            0x001864          0x8 build/default/production/main.o
+                  0x001864                  _main
