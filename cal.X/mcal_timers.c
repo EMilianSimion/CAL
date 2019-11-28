@@ -1,9 +1,3 @@
-/* 
- * File:   mcal_timers.c
- * Author: Cristian T. A.
- *
- * Created on August 16, 2018, 12:46 PM
- */
 
 #include "general.h"
 #include "mcal_timers.h"

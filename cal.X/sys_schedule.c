@@ -1,9 +1,4 @@
-/* 
- * File:   sys_schedule.c
- * Author: Cristian T. A.
- *
- * Created on August 20, 2018, 9:45 AM
- */
+
 
 #include "general.h"
 #include "sys_tasks.h"

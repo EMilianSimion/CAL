@@ -6,6 +6,7 @@
  */
 
 #include "hal_dc.h"
+#include"hal_servomotor.h"
 
 #ifndef RTE_H
 #define	RTE_H
@@ -13,8 +14,8 @@
 #define RTE_vSetMotorSpeed Hal_vSetMotorSpeed
 #define RTE_vSetMotorDir Hal_vSetMotorDir
 
-
-
+#define RTE_vSteServoMotor Hal_servo
+#define RTE_vLeftRight Hal_leftRight
 
 #ifdef	__cplusplus
 extern "C" {
