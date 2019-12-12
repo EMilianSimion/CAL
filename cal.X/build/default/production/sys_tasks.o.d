@@ -16,4 +16,5 @@ asw_com.h  \
 asw_move.h  \
 hal_dc.h  \
 rte.h  \
-hal_servomotor.h 
+hal_servomotor.h  \
+ hal_linefollower.h 
