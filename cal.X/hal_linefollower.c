@@ -28,6 +28,6 @@ T_U8 LF_u8ReadPins()
     __delay_us(10);
     LF_vSetPinsDir(INPUT);
     __delay_us(250);    
-    return ( 0x00111111 & GPIO_u16ReadPort(PORT_C) ); 
+    return ( 0b00111111 & GPIO_u16ReadPort(PORT_C) ); 
     
 }

@@ -17,9 +17,14 @@ int cntDirectie=0;
 float cntServo=90;
 BOOL flag=0;//stanga
 T_U8 valoareNegru;
-T_U8 mascaStanga = 0x00110000;
-T_U8 mascaDreapta = 0x00000011;
-T_U8 mascaCentru = 0x00010000;
+T_U8 mascaStanga = 0b00110000;
+T_U8 mascaStanga2 = 0b00100000;
+
+T_U8 mascaDreapta = 0b00000011;
+T_U8 mascaDreapta2 = 0b00000001;
+T_U8 mascaCentru = 0b00001100;
+BOOL ramasS=0;
+BOOL ramasD=0;
 void TASK_Inits()
 {
     MCAL_vInit();
@@ -43,8 +48,42 @@ void TASK_5ms()
 
 void TASK_10ms()
 {   
-    //aprindere2();
-    //RTE_vLeftRight(&cntServo,&flag);
+     valoareNegru=LF_u8ReadPins();
+    if(valoareNegru!=0)
+    {
+       miscareMotor(0, 50);
+        if(0b00100000&valoareNegru)
+        {
+           Hal_servo(0);
+           ramasS=1;
+        }
+        if(0b00010000&valoareNegru)
+           Hal_servo(80);
+        if((0b00001100&valoareNegru) &&(0b00110011&valoareNegru==0))//if(0b00001100&valoareNegru)//schimbare centru
+           Hal_servo(90);
+        if(0b00000001&valoareNegru)
+        {
+           Hal_servo(200);
+           ramasD=1;
+        }
+        if(0b00000010&valoareNegru)
+           Hal_servo(100);
+        
+    
+            
+    }
+    else 
+    {
+        if(ramasS) 
+        {
+           Hal_servo(200); 
+        }
+        else
+        {
+           Hal_servo(0); 
+        }
+        miscareMotor(1, 20);  
+    }
    
 }
 
@@ -52,29 +91,29 @@ void TASK_100ms()
 { 
    
     //aprindere();
-    valoareNegru=LF_u8ReadPins();
-    if(valoareNegru & mascaCentru)
-    {
-        
-        miscareMotor(0, 30);
-  
+   
+         /* 
+        if(valoareNegru&mascaCentru!=0)
+        {
+            miscareMotor(0, 30);
+            Hal_servo(90);
+        }
         if((valoareNegru & mascaStanga )!= 0)
         {
             Hal_servo(80);//stanga
+            if(valoareNegru&mascaStanga2)
+                Hal_servo(65);
         }
         else if((valoareNegru&mascaDreapta)!=0)
         {
             Hal_servo(100);
-        }
-        else{
-            Hal_servo(90);
-        }
-            
-    }
-    else 
-    {
-      miscareMotor(1, 0);  
-    }
+            if(valoareNegru&mascaDreapta2)
+                Hal_servo(120);
+        }     * */
+      
+        
+        
+     
 
   
 }
