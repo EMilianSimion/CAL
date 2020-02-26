@@ -16,6 +16,7 @@
 
 #define RTE_vSteServoMotor Hal_servo
 #define RTE_vLeftRight Hal_leftRight
+#define RTE_VBatery Hal_aflareProcent
 
 #ifdef	__cplusplus
 extern "C" {

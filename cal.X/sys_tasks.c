@@ -11,7 +11,8 @@
 #include"rte.h"
 #include"hal_servomotor.h"
 #include"hal_linefollower.h"
-
+#include "asw_battery.h"
+/*
 //BOOL directie=0;
 int cntDirectie=0;
 float cntServo=90;
@@ -25,14 +26,15 @@ T_U8 mascaDreapta2 = 0b00000001;
 T_U8 mascaCentru = 0b00001100;
 BOOL ramasS=0;
 BOOL ramasD=0;
+ * */
 void TASK_Inits()
 {
     MCAL_vInit();
     GPIO_u8SetPortPin(PORT_A, 10, DIGITAL ,OUTPUT);
-    Hal_servo(90);//sa, mearga drept
-    initMotor();
-    miscareMotor(0, 30);
-    
+    //Hal_servo(90);//sa, mearga drept
+    //initMotor();
+    //miscareMotor(0, 30);
+    asw_Led();
     
 }
 
@@ -48,10 +50,11 @@ void TASK_5ms()
 
 void TASK_10ms()
 {   
+    /*
      valoareNegru=LF_u8ReadPins();
     if(valoareNegru!=0)
     {
-       miscareMotor(0, 50);
+       miscareMotor(0, 40);
         if(0b00100000&valoareNegru)
         {
            Hal_servo(0);
@@ -84,7 +87,7 @@ void TASK_10ms()
         }
         miscareMotor(1, 20);  
     }
-   
+   */
 }
 
 void TASK_100ms()

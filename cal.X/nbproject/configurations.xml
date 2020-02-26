@@ -24,6 +24,8 @@
       <itemPath>rte.h</itemPath>
       <itemPath>hal_servomotor.h</itemPath>
       <itemPath>hal_linefollower.h</itemPath>
+      <itemPath>hal_battery.h</itemPath>
+      <itemPath>asw_battery.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -51,6 +53,8 @@
       <itemPath>asw_move.c</itemPath>
       <itemPath>hal_servomotor.c</itemPath>
       <itemPath>hal_linefollower.c</itemPath>
+      <itemPath>hal_battery.c</itemPath>
+      <itemPath>asw_battery.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -70,7 +74,7 @@
         <targetDevice>dsPIC33FJ128MC804</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.35</languageToolchainVersion>
         <platform>3</platform>
