@@ -31,11 +31,11 @@ void TASK_Inits()
 {
     MCAL_vInit();
     GPIO_u8SetPortPin(PORT_A, 10, DIGITAL ,OUTPUT);
-    //Hal_servo(90);//sa, mearga drept
+    Hal_servo(90);//sa, mearga drept
     //initMotor();
     //miscareMotor(0, 30);
-    asw_Led();
-    
+    //asw_Led();
+   
 }
 
 void TASK_1ms()
@@ -123,7 +123,7 @@ void TASK_100ms()
 
 void TASK_500ms()
 { 
-
+     moved_until();
 }
 
 void TASK_1000ms()

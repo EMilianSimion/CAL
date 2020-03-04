@@ -54,7 +54,13 @@ void QEI_vResetCount()
 {
     POS1CNT=32000;
 }
-
-
-
+T_S16 QEI_s16getElapsed()
+{
+    //pozitiva deplasare inainte
+    T_S16 count = QEI_u16getCount();
+    count -= 32000;
+    QEI_vResetCount();
+    return count;
+}
+ 
 

@@ -6,9 +6,11 @@
  */
 
 #include"hal_dc.h"
+#include "hal_f16distanceMoved.h"
 
 #ifndef ASW_MOVE_H
 #define	ASW_MOVE_H
+
 
 #ifdef	__cplusplus
 extern "C" {
@@ -16,7 +18,7 @@ extern "C" {
 
     void initMotor();
     void miscareMotor(BOOL direction,T_F16 viteza);
-    
+    void moved_until();
 
 
 #ifdef	__cplusplus
